@@ -1,0 +1,4 @@
+
+
+NET "CLK" LOC = "M6"; # CLK signal
+NET "CLK_M" LOC = "A9";      # Out signal

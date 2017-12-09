@@ -1,0 +1,16 @@
+NET "SIN" LOC = "B2";
+NET "CLK" LOC = "M6"; # CLK signal
+
+NET "SAL<6>" LOC = "L14"; # SEÑAL = CA
+NET "SAL<5>" LOC = "H12"; # SEÑAL = CB
+NET "SAL<4>" LOC = "N14"; # SEÑAL = CC
+NET "SAL<3>" LOC = "N11"; # SEÑAL = CD
+NET "SAL<2>" LOC = "P12"; # SEÑAL = CE
+NET "SAL<1>" LOC = "L13"; # SEÑAL = CF
+NET "SAL<0>" LOC = "M12"; # SEÑAL = CG
+
+NET "ACT_SEG<0>" LOC = "K14"; # SEÑAL = AN0
+NET "ACT_SEG<1>" LOC = "M13"; # SEÑAL = AN1
+NET "ACT_SEG<2>" LOC = "J12"; # SEÑAL = AN2
+NET "ACT_SEG<3>" LOC = "F12"; # SEÑAL = AN3
+

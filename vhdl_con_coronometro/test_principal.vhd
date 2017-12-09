@@ -2,10 +2,10 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   16:51:59 11/13/2017
+-- Create Date:   06:34:55 12/09/2017
 -- Design Name:   
--- Module Name:   C:/Users/alumno/Desktop/CELT/proy/test_principal.vhd
--- Project Name:  proy
+-- Module Name:   /home/kike/Escritorio/Proyectos/celt/vhdl_con_coronometro/test_principal.vhd
+-- Project Name:  prueba1
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
@@ -41,7 +41,11 @@ ARCHITECTURE behavior OF test_principal IS
  
     COMPONENT principal
     PORT(
+         SIN : IN  std_logic;
          CLK : IN  std_logic;
+         RESET : IN  std_logic;
+         START : IN  std_logic;
+         CRONO : IN  std_logic;
          SAL : OUT  std_logic_vector(6 downto 0);
          ACT_SEG : OUT  std_logic_vector(3 downto 0)
         );
@@ -49,20 +53,28 @@ ARCHITECTURE behavior OF test_principal IS
     
 
    --Inputs
+   signal SIN : std_logic := '0';
    signal CLK : std_logic := '0';
+   signal RESET : std_logic := '0';
+   signal START : std_logic := '0';
+   signal CRONO : std_logic := '0';
 
  	--Outputs
    signal SAL : std_logic_vector(6 downto 0);
    signal ACT_SEG : std_logic_vector(3 downto 0);
 
    -- Clock period definitions
-   constant CLK_period : time := 10 ns;
+   constant CLK_period : time := 20 ns;
  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
    uut: principal PORT MAP (
+          SIN => SIN,
           CLK => CLK,
+          RESET => RESET,
+          START => START,
+          CRONO => CRONO,
           SAL => SAL,
           ACT_SEG => ACT_SEG
         );
@@ -82,7 +94,17 @@ BEGIN
    begin		
       -- hold reset state for 100 ns.
       wait for 100 ns;	
-
+		RESET <= '1';
+		CRONO <= '1';
+		START <= '0';
+		SIN <= '1';
+		wait for 100 ns;
+		RESET <= '0';
+		START <= '1';
+		wait for 1000ms;
+		START <= '0';
+		wait for 10ms;
+		CRONO <= '0';
       wait for CLK_period*10;
 
       -- insert stimulus here 

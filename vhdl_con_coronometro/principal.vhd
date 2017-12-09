@@ -6,6 +6,9 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 entity principal is
     Port ( SIN : in STD_LOGIC;
            CLK : in  STD_LOGIC;
+           RESET : in  STD_LOGIC;
+           START : in  STD_LOGIC;
+           CRONO : in STD_LOGIC;
            SAL : OUT STD_LOGIC_VECTOR (6 downto 0);
            ACT_SEG : OUT STD_LOGIC_VECTOR (3 downto 0)
            );
@@ -26,6 +29,8 @@ signal Capt_EN : STD_LOGIC;
 signal Val_EN : STD_LOGIC;
 signal reg_desp_val : STD_LOGIC_VECTOR (13 downto 0);
 signal val_visual : STD_LOGIC_VECTOR (13 downto 0);
+signal tiempo_cronometro : STD_LOGIC_VECTOR (13 downto 0):= (others=>'0');
+signal hora_senal : STD_LOGIC_VECTOR (13 downto 0):= (others=>'0');
 
 --component gen_signal 
 --         Port ( clk : in  STD_LOGIC;
@@ -102,8 +107,26 @@ component visualizacion
            SEG7 : out  STD_LOGIC_VECTOR (6 downto 0);
            AN : out  STD_LOGIC_VECTOR (3 downto 0));
 end component;
-
+component cronometro 
+    Port ( 
+           reset : in STD_LOGIC;
+           start : in STD_LOGIC;
+           CLK : in  STD_LOGIC;
+           minutos_decenas : out  STD_LOGIC_VECTOR (2 downto 0);
+           minutos_unidades : out  STD_LOGIC_VECTOR (3 downto 0);
+           segundos_decenas : out  STD_LOGIC_VECTOR (2 downto 0);
+           segundos_unidades : out  STD_LOGIC_VECTOR (3 downto 0));
+end component;
 begin
+	PROC_SELECT_OUTPUT: process(CLK)
+	begin
+		if CRONO = '1' then
+		  val_visual <= tiempo_cronometro;
+		else
+		  val_visual <= hora_senal;
+		end if;
+	end process;
+
 registro_desp40 : reg_desp40
 
             port map (
@@ -112,7 +135,16 @@ registro_desp40 : reg_desp40
               Q    =>  reg_to_sum
             ); 
 
-
+cronometer : cronometro
+        port map (
+            reset => RESET,
+            start => START,
+            CLK => CLK,
+            minutos_decenas => tiempo_cronometro(13 downto 11),
+            minutos_unidades => tiempo_cronometro(10 downto 7),
+            segundos_decenas =>  tiempo_cronometro(6 downto 4),
+            segundos_unidades => tiempo_cronometro(3 downto 0)
+          );
 sumador : sumador40
 
             port map (
@@ -174,7 +206,7 @@ registro_desp : reg_desp
 reg : registro
               port map (
                 ENTRADA => reg_desp_val,
-                SALIDA => val_visual,
+                SALIDA => hora_senal,
                 EN => Val_EN,
                 CLK => CLK_M
                 );

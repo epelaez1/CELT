@@ -47,26 +47,26 @@ end component;
 
 
 begin
-U1 : decod7s
+U1 : refresco
+       port map (
+					  CLK=>CLK,
+            AN=>AN,
+            S=>N_S
+                );
+U2 : mux4x4
+      port map (
+          E0=>E0,
+          E1=>E1,
+          E2=>E2,
+          E3=>E3,
+          Y=>N_Y,
+          S=>N_S
+          );
+U3 : decod7s
       port map (
                DIN=>N_Y,
                S7SEG=>SEG7
                ); 
-U2 : mux4x4
-      port map (
-					E0=>E0,
-					E1=>E1,
-					E2=>E2,
-					E3=>E3,
-					Y=>N_Y,
-					S=>N_S
-					);
-U3 : refresco
-       port map (
-					 CLK=>CLK,
-                AN=>AN,
-                S=>N_S
-                );
 
 
 end a_visualizacion;

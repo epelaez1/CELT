@@ -1,3 +1,13 @@
+-------------------------------------------------------
+-- Registro de validación
+--
+-- Componente encargado de envíar los 14 bits 
+-- muestreados de una trama al módulo visualización.
+-- Sólo envía los datos cuando el aútomata lo autoriza
+-- mediante la señal ENABLE
+--
+-------------------------------------------------------
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
@@ -6,9 +16,9 @@ entity registro is
 	Port (
 		ENTRADA : in STD_LOGIC_VECTOR (13 downto 0); -- Entradas
 		SALIDA : out STD_LOGIC_VECTOR (13 downto 0); -- Salidas
-		EN : in STD_LOGIC; -- Enable
-		CLK : in STD_LOGIC
-	); -- Reloj
+		EN : in STD_LOGIC;                           -- Enable
+		CLK : in STD_LOGIC                           -- Reloj 
+	); 
 end registro;
 architecture a_registro of registro is
 begin

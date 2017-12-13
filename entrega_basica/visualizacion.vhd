@@ -1,3 +1,11 @@
+--------------------------------------------
+-- Módulo de visualización
+-- 
+-- Conjunto de componentes que muestran en el display 
+-- de la FPGA la hora calculada a partir de la señal
+-- binaria recibida
+--
+--------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
@@ -5,19 +13,19 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity visualizacion is
     Port ( 
-           CLK : in  STD_LOGIC;
-           E0 : in   STD_LOGIC_VECTOR (3 downto 0);  -- entrada E0
-           E1 : in   STD_LOGIC_VECTOR (3 downto 0);  -- entrada E1
-           E2 : in   STD_LOGIC_VECTOR (3 downto 0);  -- entrada E2
-           E3 : in   STD_LOGIC_VECTOR (3 downto 0);
-           SEG7 : out  STD_LOGIC_VECTOR (6 downto 0);
-           AN : out  STD_LOGIC_VECTOR (3 downto 0));
+           CLK : in  STD_LOGIC;                       -- Reloj interno de la FPGA
+           E0 : in   STD_LOGIC_VECTOR (3 downto 0);   -- Entrada destinada al display de unidades
+           E1 : in   STD_LOGIC_VECTOR (3 downto 0);   -- Entrada destinada al display de decenas
+           E2 : in   STD_LOGIC_VECTOR (3 downto 0);   -- Entrada destinada al display de centenas
+           E3 : in   STD_LOGIC_VECTOR (3 downto 0);   -- Entrada destinada al display de millares
+           SEG7 : out  STD_LOGIC_VECTOR (6 downto 0); -- Valor de cada uno de los segmentos de un número
+           AN : out  STD_LOGIC_VECTOR (3 downto 0));  -- Señal de control de activación del display
 end visualizacion;
 
 architecture a_visualizacion of visualizacion is
 
-signal N_S  : STD_LOGIC_VECTOR (1 downto 0);
-signal N_Y  : STD_LOGIC_VECTOR (3 downto 0);
+signal N_S  : STD_LOGIC_VECTOR (1 downto 0);    -- Conexión entre el módulo refresco y el multiplexor
+signal N_Y  : STD_LOGIC_VECTOR (3 downto 0);    -- Conexión entre el multiplexor y el decodificador
 
 
 
@@ -34,7 +42,7 @@ end component;
 
 component decod7s 
   port ( DIN   : in  STD_LOGIC_VECTOR (3 downto 0);   -- entrada de datos
-         S7SEG : out STD_LOGIC_VECTOR (0 to 6));   -- salidas 7seg (abcdefg)
+         S7SEG : out STD_LOGIC_VECTOR (0 to 6));   -- salidas 7seg 
 end component;
 
 component refresco

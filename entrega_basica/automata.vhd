@@ -1,16 +1,27 @@
+-------------------------------------------------------------------------
+-- Autómata de Moore
+--
+-- Autómata de Moore con 6 estados diferentes.
+-- Se encarga de procesar los datos obtenidos de la señal de entrada
+-- y devolver a un registro de 14 bits el valor de cada uno de los bits
+-- emitidos.
+--
+--
+-------------------------------------------------------------------------
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 entity automata is
 	Port ( 
-		CLK : in STD_LOGIC; -- Reloj del autómata
-		C0 : in STD_LOGIC; -- Condición de decision para “0”
-		C1 : in STD_LOGIC; -- Condición de decisión para “1”
-		DATO : out STD_LOGIC; -- Datos a cargar 
-		CAPTUR : out STD_LOGIC; -- Enable del reg. de desplaz.
-		VALID : out STD_LOGIC
-	); -- Enable del reg de validación
+		CLK : in STD_LOGIC;  	   		-- Reloj del autómata
+		C0 : in STD_LOGIC; 				-- Condición de decision para “0”
+		C1 : in STD_LOGIC; 				-- Condición de decisión para “1”
+		DATO : out STD_LOGIC; 			-- Datos a cargar 
+		CAPTUR : out STD_LOGIC; 		-- Enable del reg. de desplaz.
+		VALID : out STD_LOGIC           -- Enable del reg de validación
+	); 
 end automata;
 architecture a_automata of automata is
 	type TIPO_ESTADO is (ESP_SYNC,AVAN_ZM,MUESTREO,DATO0,DATO1,DATOSYNC);
@@ -20,7 +31,9 @@ architecture a_automata of automata is
 	process (CLK)
 		variable cont : STD_LOGIC_VECTOR (7 downto 0):="00000000";
 		begin
-			if (CLK'event and CLK = '1') then
+			if (CLK'event and CLK = '1') then  -- Modifica el estado del autómata
+											   -- en función de las condiciones 
+											   -- de entrada.
 				case ST is
 					when ESP_SYNC => 
 						if (C0 = '0') and (C1 = '0') then
@@ -62,7 +75,8 @@ architecture a_automata of automata is
 				end case;
 			end if;
 	 end process; 
-	 with ST select
+	 with ST select    				-- Se asigna los valores de 
+	 								-- salida en función del estado
 		 salidas<=
 			"000" when ESP_SYNC,
 			"000" when AVAN_ZM,

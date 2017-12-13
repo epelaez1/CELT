@@ -16,21 +16,21 @@ end principal;
 
 architecture a_principal of principal is
 
-signal reg_to_sum  : STD_LOGIC_VECTOR (39 downto 0);
-signal CLK_M  : STD_LOGIC;
---signal audio  : STD_LOGIC;
-signal sum_out : STD_LOGIC_VECTOR (5 downto 0);
-signal GTU1 : STD_LOGIC;
-signal LEU1 : STD_LOGIC;
-signal LEU2 : STD_LOGIC;
-signal SAND : STD_LOGIC;
-signal Dat_SIN : STD_LOGIC;
-signal Capt_EN : STD_LOGIC;
-signal Val_EN : STD_LOGIC;
-signal reg_desp_val : STD_LOGIC_VECTOR (13 downto 0);
-signal val_visual : STD_LOGIC_VECTOR (13 downto 0);
-signal tiempo_cronometro : STD_LOGIC_VECTOR (13 downto 0):= (others=>'0');
-signal hora_senal : STD_LOGIC_VECTOR (13 downto 0):= (others=>'0');
+  signal reg_to_sum  : STD_LOGIC_VECTOR (39 downto 0);
+  signal CLK_M  : STD_LOGIC;
+  --signal audio  : STD_LOGIC;
+  signal sum_out : STD_LOGIC_VECTOR (5 downto 0);
+  signal GTU1 : STD_LOGIC;
+  signal LEU1 : STD_LOGIC;
+  signal LEU2 : STD_LOGIC;
+  signal SAND : STD_LOGIC;
+  signal Dat_SIN : STD_LOGIC;
+  signal Capt_EN : STD_LOGIC;
+  signal Val_EN : STD_LOGIC;
+  signal reg_desp_val : STD_LOGIC_VECTOR (13 downto 0);
+  signal val_visual : STD_LOGIC_VECTOR (13 downto 0);
+  signal tiempo_cronometro : STD_LOGIC_VECTOR (13 downto 0):= (others=>'0');
+  signal hora_senal : STD_LOGIC_VECTOR (13 downto 0):= (others=>'0');
 
 --component gen_signal 
 --         Port ( clk : in  STD_LOGIC;
@@ -40,9 +40,11 @@ signal hora_senal : STD_LOGIC_VECTOR (13 downto 0):= (others=>'0');
 
 
 component reg_desp40 
-     Port ( SIN : in STD_LOGIC; -- Datos de entrada serie
-            CLK : in STD_LOGIC; -- Reloj de muestreo
-            Q :  out STD_LOGIC_VECTOR (39 downto 0)); -- Salida paralelo
+    Port ( 
+        SIN : in STD_LOGIC; -- Datos de entrada serie
+        CLK : in STD_LOGIC; -- Reloj de muestreo
+        Q :  out STD_LOGIC_VECTOR (39 downto 0)
+    ); -- Salida paralelo
     
 end component;
 
@@ -118,7 +120,7 @@ component cronometro
            segundos_unidades : out  STD_LOGIC_VECTOR (3 downto 0));
 end component;
 begin
-	PROC_SELECT_OUTPUT: process(CLK)
+	PROC_SELECT_OUTPUT: process(CRONO)
 	begin
 		if CRONO = '1' then
 		  val_visual <= tiempo_cronometro;

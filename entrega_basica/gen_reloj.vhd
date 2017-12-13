@@ -15,8 +15,10 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity gen_reloj is
-    Port ( CLK : in  STD_LOGIC;      -- Reloj de la FPGA
-           CLK_M : out  STD_LOGIC);  -- Reloj de muestreo
+    Port ( 
+        CLK : in  STD_LOGIC; -- Reloj de la FPGA
+        CLK_M : out  STD_LOGIC -- Reloj de muestreo
+    );  
 end gen_reloj;
 
 architecture a_gen_reloj of gen_reloj is

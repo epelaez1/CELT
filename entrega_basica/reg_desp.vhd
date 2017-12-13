@@ -21,19 +21,19 @@ entity reg_desp is
 	); 
 end reg_desp;
 architecture a_reg_desp of reg_desp is
-signal reg  : STD_LOGIC_VECTOR (13 downto 0); 		-- Señal auxiliar. Copia del registro
-begin
-process (CLK)
-  begin
-  if (CLK'event and CLK='1') then
-		if EN = '1' then	
-			reg(13 downto 1) <= reg(12 downto 0); 	-- Se desplazan toos los bits y se
-													-- descarta el mas significativo.
-			reg(0)<=SIN; 							-- Se asigna cada nuevo bit de la 
-													-- señal al bit menos significativo
-													-- del registro
-		end if;
-  end if;
-end process;
-Q<=reg;
+	signal reg  : STD_LOGIC_VECTOR (13 downto 0); 		-- Señal auxiliar. Copia del registro
+	begin
+	process (CLK)
+	    begin
+	    if (CLK'event and CLK='1') then
+			if EN = '1' then	
+				reg(13 downto 1) <= reg(12 downto 0); 	-- Se desplazan toos los bits y se
+														-- descarta el mas significativo.
+				reg(0)<=SIN; 							-- Se asigna cada nuevo bit de la 
+														-- señal al bit menos significativo
+														-- del registro
+			end if;
+	    end if;
+	end process;
+	Q<=reg;
 end a_reg_desp;

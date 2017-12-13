@@ -21,13 +21,13 @@ entity registro is
 	); 
 end registro;
 architecture a_registro of registro is
-begin
-process (CLK)
-  begin
-  if (CLK'event and CLK='1') then
-		if EN = '1' then				--Cuando este activo el enable, se activa la validación						
-			SALIDA <= ENTRADA;
-		end if;
-  end if;
-end process;
+    begin
+    process (CLK)
+        begin
+        if (CLK'event and CLK='1') then
+    		if EN = '1' then				--Cuando este activo el enable, se activa la validación						
+    			SALIDA <= ENTRADA;
+    		end if;
+        end if;
+    end process;
 end a_registro;

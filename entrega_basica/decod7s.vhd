@@ -1,3 +1,10 @@
+---------------------------
+--Decodificador      
+--
+--activa los leds correspondientes, según los números dados (activos a nivel bajo)
+--
+-------------------------
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
@@ -9,7 +16,7 @@ end decod7s;
 architecture a_decod7s of decod7s is
 begin
    with DIN select S7SEG <=
-      "0000001" when "0000",
+      "0000001" when "0000",  
       "1001111" when "0001",
       "0010010" when "0010",
       "0000110" when "0011",

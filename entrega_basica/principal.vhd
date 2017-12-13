@@ -1,31 +1,38 @@
+--------------------------------------
+--Principal
+--
+--Agrupa todos los submódulos 
+--
+--
+--------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity principal is
-    Port ( SIN : in STD_LOGIC;
-           CLK : in  STD_LOGIC;
-           SAL : OUT STD_LOGIC_VECTOR (6 downto 0);
-           ACT_SEG : OUT STD_LOGIC_VECTOR (3 downto 0)
+    Port ( SIN : in STD_LOGIC; --entrada de datos
+           CLK : in  STD_LOGIC; --entrada de reloj
+           SAL : OUT STD_LOGIC_VECTOR (6 downto 0); --segmentos de displays
+           ACT_SEG : OUT STD_LOGIC_VECTOR (3 downto 0) --control de displays
            );
 end principal;
 
 architecture a_principal of principal is
 
-signal reg_to_sum  : STD_LOGIC_VECTOR (39 downto 0);
+signal reg_to_sum  : STD_LOGIC_VECTOR (39 downto 0); --comunica el registro de desplazamiento40 con el sumador
 signal CLK_M  : STD_LOGIC;
 --signal audio  : STD_LOGIC;
-signal sum_out : STD_LOGIC_VECTOR (5 downto 0);
-signal GTU1 : STD_LOGIC;
-signal LEU1 : STD_LOGIC;
-signal LEU2 : STD_LOGIC;
-signal SAND : STD_LOGIC;
-signal Dat_SIN : STD_LOGIC;
-signal Capt_EN : STD_LOGIC;
-signal Val_EN : STD_LOGIC;
-signal reg_desp_val : STD_LOGIC_VECTOR (13 downto 0);
-signal val_visual : STD_LOGIC_VECTOR (13 downto 0);
+signal sum_out : STD_LOGIC_VECTOR (5 downto 0); --salida del sumador que recibe el comparador
+signal GTU1 : STD_LOGIC; --salida sumador mayor que umbral 1
+signal LEU1 : STD_LOGIC; --salida sumador menor que umbral 1
+signal LEU2 : STD_LOGIC; --salida sumador menor que umbral 2
+signal SAND : STD_LOGIC; --salida del and
+signal Dat_SIN : STD_LOGIC; --comunica Dato (autómata) con SIN del registro de desplazamiento
+signal Capt_EN : STD_LOGIC; --comunica Captura (autómata) con EN del registro de desplazamiento
+signal Val_EN : STD_LOGIC; --comunica Validar (autómata) con EN del registro de validación
+signal reg_desp_val : STD_LOGIC_VECTOR (13 downto 0); --comunica el registro de desplazamiento con el r.validacion
+signal val_visual : STD_LOGIC_VECTOR (13 downto 0); --comunica el registro de validacion con visualización
 
 --component gen_signal 
 --         Port ( clk : in  STD_LOGIC;
@@ -137,22 +144,22 @@ clock40 : gen_reloj
 --            );
 comparadorU1 : comparador 
             port map (
-              P => sum_out,
-              Q => "100010",
+              P => sum_out, --entra al comparador la salida del sumador
+              Q => "100010", --umbral 1, 34
               PGTQ => GTU1,
               PLEQ => LEU1
               );
 comparadorU2 : comparador 
             port map (
-              P => sum_out,
-              Q => "100110",
-              PGTQ => open,
+              P => sum_out, --entra al comparador la salida del sumador
+              Q => "100110", --umbral 2, 38
+              PGTQ => open, 
               PLEQ => LEU2
               );
 comparador_and_2 : AND_2
               port map (
-                  A => GTU1,
-                  B => LEU2,
+                  A => GTU1, --entra cuando sal_sumador es mayor que umbral 1
+                  B => LEU2, --entra cuando sal_sumador es menor que umbral 2
                   S => SAND
                 );
 automata_moore : automata

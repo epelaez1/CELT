@@ -3,7 +3,7 @@
 --
 -- Componente encargado de envíar los 14 bits 
 -- muestreados de una trama al módulo visualización.
--- Sólo envía los datos cuando el aútomata lo autoriza
+-- Sólo envía los datos cuando el autómata lo autoriza
 -- mediante la señal ENABLE
 --
 -------------------------------------------------------
@@ -25,7 +25,7 @@ begin
 process (CLK)
   begin
   if (CLK'event and CLK='1') then
-		if EN = '1' then	
+		if EN = '1' then				--Cuando este activo el enable, se activa la validación						
 			SALIDA <= ENTRADA;
 		end if;
   end if;

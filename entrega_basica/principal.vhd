@@ -22,10 +22,10 @@ end principal;
 
 architecture a_principal of principal is
 
-    signal reg_to_sum  : STD_LOGIC_VECTOR (39 downto 0); -- Comunica el registro de desplazamiento40 con el sumador
+    signal reg_to_sum  : STD_LOGIC_VECTOR (39 downto 0):= (others=>'0'); -- Comunica el registro de desplazamiento40 con el sumador
     signal CLK_M  : STD_LOGIC;
     --signal audio  : STD_LOGIC;
-    signal sum_out : STD_LOGIC_VECTOR (5 downto 0); -- Salida del sumador que recibe el comparador
+    signal sum_out : STD_LOGIC_VECTOR (5 downto 0):= (others=>'0'); -- Salida del sumador que recibe el comparador
     signal GTU1 : STD_LOGIC; -- Salida sumador mayor que umbral 1
     signal LEU1 : STD_LOGIC; -- Salida sumador menor que umbral 1
     signal LEU2 : STD_LOGIC; -- Salida sumador menor que umbral 2
@@ -33,8 +33,8 @@ architecture a_principal of principal is
     signal Dat_SIN : STD_LOGIC; -- Comunica Dato (autómata) con SIN del registro de desplazamiento
     signal Capt_EN : STD_LOGIC; -- Comunica Captura (autómata) con EN del registro de desplazamiento
     signal Val_EN : STD_LOGIC; -- Comunica Validar (autómata) con EN del registro de validación
-    signal reg_desp_val : STD_LOGIC_VECTOR (13 downto 0); -- Comunica el registro de desplazamiento con el r.validacion
-    signal val_visual : STD_LOGIC_VECTOR (13 downto 0); -- Comunica el registro de validacion con visualización
+    signal reg_desp_val : STD_LOGIC_VECTOR (13 downto 0):= (others=>'0'); -- Comunica el registro de desplazamiento con el r.validacion
+    signal val_visual : STD_LOGIC_VECTOR (13 downto 0):= (others=>'0'); -- Comunica el registro de validacion con visualización
 
     --component gen_signal 
     --         Port ( clk : in  STD_LOGIC;

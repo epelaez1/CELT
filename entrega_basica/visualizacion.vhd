@@ -1,8 +1,8 @@
 --------------------------------------------
--- Módulo de visualización
+-- Mdulo de visualizacin
 -- 
 -- Conjunto de componentes que muestran en el display 
--- de la FPGA la hora calculada a partir de la señal
+-- de la FPGA la hora calculada a partir de la seal
 -- binaria recibida
 --
 --------------------------------------------
@@ -18,15 +18,15 @@ entity visualizacion is
         E1 : in   STD_LOGIC_VECTOR (3 downto 0);   -- Entrada destinada al display de decenas
         E2 : in   STD_LOGIC_VECTOR (3 downto 0);   -- Entrada destinada al display de centenas
         E3 : in   STD_LOGIC_VECTOR (3 downto 0);   -- Entrada destinada al display de millares
-        SEG7 : out  STD_LOGIC_VECTOR (6 downto 0); -- Valor de cada uno de los segmentos de un número
-        AN : out  STD_LOGIC_VECTOR (3 downto 0) -- Señal de control de activación del display
+        SEG7 : out  STD_LOGIC_VECTOR (6 downto 0); -- Valor de cada uno de los segmentos de un nmero
+        AN : out  STD_LOGIC_VECTOR (3 downto 0) -- Seal de control de activacin del display
     );  
 end visualizacion;
 
 architecture a_visualizacion of visualizacion is
 
-    signal N_S  : STD_LOGIC_VECTOR (1 downto 0);    -- Conexión entre el módulo refresco y el multiplexor
-    signal N_Y  : STD_LOGIC_VECTOR (3 downto 0);    -- Conexión entre el multiplexor y el decodificador
+    signal N_S  : STD_LOGIC_VECTOR (1 downto 0);    -- Conexin entre el mdulo refresco y el multiplexor
+    signal N_Y  : STD_LOGIC_VECTOR (3 downto 0);    -- Conexin entre el multiplexor y el decodificador
 
 
 
@@ -53,8 +53,8 @@ architecture a_visualizacion of visualizacion is
     component refresco
         Port ( 
             CLK : in  STD_LOGIC;			-- entrada de reloj
-            AN : out  STD_LOGIC_VECTOR (3 downto 0); -- activación displays
-            S : out  STD_LOGIC_VECTOR (1 downto 0) -- selección en el MUX
+            AN : out  STD_LOGIC_VECTOR (3 downto 0); -- activacin displays
+            S : out  STD_LOGIC_VECTOR (1 downto 0) -- seleccin en el MUX
         ); 
     end component;
 

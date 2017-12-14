@@ -23,8 +23,8 @@ end refresco;
 
 architecture a_refresco of refresco is
 
-    signal SS  : STD_LOGIC_VECTOR (1 downto 0); 
-    signal div1   : STD_LOGIC_VECTOR (31 downto 0);
+    signal SS  : STD_LOGIC_VECTOR (1 downto 0):= (others=>'0'); 
+    signal div1   : STD_LOGIC_VECTOR (31 downto 0):= (others=>'0'); -- Contador
     begin
 
     process (CLK)

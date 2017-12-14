@@ -1,10 +1,10 @@
 ---------------------------------------------------------
--- Generador de señal digital de 40 Hz
+-- Generador de seal digital de 40 Hz
 --
--- Este módulo se encarga de generar una señal de reloj
--- de 40 Hz que se usará para muestrear la señal de
+-- Este mdulo se encarga de generar una seal de reloj
+-- de 40 Hz que se usar para muestrear la seal de
 -- entrada.
--- Ésta se calcula partir de la señal de reloj interna 
+-- sta se calcula partir de la seal de reloj interna 
 -- de 50 MHz que posee la FPGA.
 --
 ---------------------------------------------------------
@@ -31,7 +31,7 @@ begin
     begin
         if CLK'event and CLK='1' then
 		      cont_M <= cont_M + 1;
-            if cont_M >= 625000 then -- división de frecuencia a 40 Hz
+            if cont_M >= 625000 then -- divisin de frecuencia a 40 Hz
                 S_M <=not S_M;
                 cont_M <=(others=>'0');
             end if;

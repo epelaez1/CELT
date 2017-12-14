@@ -13,10 +13,10 @@ architecture Behavioral of gen_signal is
 
 signal clk_100ms : std_logic:='0';
 
-signal hora_dec: std_logic_vector (2 downto 0):="001";   -- Configuración digito decenas de la hora
-signal hora_unid: std_logic_vector (3 downto 0):="1001"; -- Configuración digito unidades de la hora
-signal min_dec:std_logic_vector (2 downto 0):="011";     -- Configuración digito decenas de los minutos
-signal min_unid:std_logic_vector (3 downto 0):="0000";   -- Configuración digito unidades de los minutos
+signal hora_dec: std_logic_vector (2 downto 0):="001";   -- Configuracin digito decenas de la hora
+signal hora_unid: std_logic_vector (3 downto 0):="1001"; -- Configuracin digito unidades de la hora
+signal min_dec:std_logic_vector (2 downto 0):="011";     -- Configuracin digito decenas de los minutos
+signal min_unid:std_logic_vector (3 downto 0):="0000";   -- Configuracin digito unidades de los minutos
 
 signal cont:std_logic_vector (3 downto 0):="0000";
 signal salida:std_logic:='0';
@@ -34,14 +34,14 @@ if clk'event and clk='1' then
  clk_100ms <='0';
  cont_clk := cont_clk +1;
 			
-		-- DIFERENTES configuraciones de la duración de 1 bit y por lo tanto de la trama (=15bits)
-		-- SOLO debe haber una línea de "if" sin comentar
-		-- Si se quiere probar con el resto del circuito hay que ajustar también 
-		-- la frecuencia de muestreo (señal de reloj CLK_M)
+		-- DIFERENTES configuraciones de la duracin de 1 bit y por lo tanto de la trama (=15bits)
+		-- SOLO debe haber una lnea de "if" sin comentar
+		-- Si se quiere probar con el resto del circuito hay que ajustar tambin 
+		-- la frecuencia de muestreo (seal de reloj CLK_M)
 			
-  if cont_clk>= 5000000 then         ----  1s por bit -         15s por trama
+  --if cont_clk>= 5000000 then         ----  1s por bit -         15s por trama
  --  if cont_clk>= 333333 then       ----  1/15s por bit -     1 s por trama
-   --if cont_clk>= 50000 then        ----  10ms por bit -     150ms por trama
+   if cont_clk>= 50000 then        ----  10ms por bit -     150ms por trama
   --if cont_clk>= 5000 then          ----  1ms por bit -       15ms por trama
          
 		  clk_100ms <= '1';

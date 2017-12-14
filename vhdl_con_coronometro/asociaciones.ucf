@@ -1,9 +1,15 @@
+# Señal de entrada
 NET "SIN" LOC = "B2";
-NET "CLK" LOC = "M6"; # CLK signal
+
+# Reloj principal del sistema
+NET "CLK" LOC = "M6";
+
+# Botones de control
 NET "RESET" LOC = "K3";
 NET "START" LOC = "L3";
 NET "CRONO" LOC = "P11";
 
+# Cada uno de los 7 segmentos de los números del display
 NET "SAL<6>" LOC = "L14"; # SEAL = CA
 NET "SAL<5>" LOC = "H12"; # SEAL = CB
 NET "SAL<4>" LOC = "N14"; # SEAL = CC
@@ -12,6 +18,7 @@ NET "SAL<2>" LOC = "P12"; # SEAL = CE
 NET "SAL<1>" LOC = "L13"; # SEAL = CF
 NET "SAL<0>" LOC = "M12"; # SEAL = CG
 
+# Selector de número del display
 NET "ACT_SEG<0>" LOC = "K14"; # SEAL = AN0
 NET "ACT_SEG<1>" LOC = "M13"; # SEAL = AN1
 NET "ACT_SEG<2>" LOC = "J12"; # SEAL = AN2
